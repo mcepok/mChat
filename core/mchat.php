@@ -169,6 +169,25 @@ class mchat
 		$this->render_page('index');
 	}
 
+    /**
+     * Render mChat on the index page
+     */
+    public function page_nczone()
+    {
+        if (!$this->auth->acl_get('u_mchat_view'))
+        {
+            return;
+        }
+
+        $this->assign_whois();
+
+        $this->lang->add_lang('mchat', 'dmzx/mchat');
+
+        $this->assign_bbcodes_smilies();
+
+        $this->render_page('index');
+    }
+
 	/**
 	 * Render the mChat custom page
 	 *
