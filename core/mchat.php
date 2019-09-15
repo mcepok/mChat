@@ -554,9 +554,6 @@ class mchat
 	{
 		$this->init_action('u_mchat_view', false);
 
-		// Keep the session alive forever if there is no session timeout
-		$keep_session_alive = !$this->mchat_settings->cfg('mchat_timeout');
-
 		// Whether to check the log table for new entries
 		$need_log_update = $this->mchat_settings->cfg('mchat_live_updates');
 
@@ -573,11 +570,6 @@ class mchat
 			'need_log_update',
 		];
 		extract($this->dispatcher->trigger_event('dmzx.mchat.action_refresh_before', compact($vars)));
-
-		if ($keep_session_alive)
-		{
-			$this->user->update_session_infos();
-		}
 
 		$response = ['refresh' => true];
 
